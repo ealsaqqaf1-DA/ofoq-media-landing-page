@@ -40,10 +40,16 @@ jobs:
         env:
           GITHUB_PAGES: 'true'
 
+      - name: Copy dist to docs
+        run: |
+          rm -rf docs
+          cp -r dist/public docs
+          touch docs/.nojekyll
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist/public'
+          path: './docs'
 
   deploy:
     environment:
